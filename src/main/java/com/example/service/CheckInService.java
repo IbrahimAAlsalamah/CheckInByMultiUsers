@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class CheckInService {
@@ -21,12 +22,10 @@ public class CheckInService {
     UserRepository userRepository;
 
     public CheckIn InsertCheckIn(CheckInRequest checkInRequest,Long userId){
-
         CheckIn checkIn = new CheckIn(checkInRequest);
         User user = userRepository.findById(userId).get();
         checkIn.getUsers().add(user);
         checkInRepository.save(checkIn);
-
         return checkIn;
     }
 
